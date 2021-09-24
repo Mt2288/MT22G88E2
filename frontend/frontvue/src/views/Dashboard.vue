@@ -2,6 +2,7 @@
   <div id="dashboard">
     <h1>Gestion de ferreteria</h1>
     <TaskApp/>
+    
   </div>
 </template>
 
@@ -10,10 +11,11 @@
 // @ is an alias to /src
 import TaskApp from '@/components/TaskApp.vue'
 
+
 export default {
   name: 'Task',
   components: {
-    TaskApp
+    TaskApp,    
   }
 }
 </script>

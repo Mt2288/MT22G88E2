@@ -8,11 +8,6 @@ router.get('/', async (req, res) => {
     const tasks = await Task.find();
  
     res.json(tasks);
-    
-    
-    /*res.json({
-        status: 'funciona'
-    });*/
 });
 //crea una nueva entrada en la base de datos de acuerto al Schema definido en elarchivo task.js
 router.post('/', async (req, res) =>{
@@ -29,6 +24,7 @@ router.get('/:id', async (req, res) => {
     const task = await Task.findById(req.params.id);
     res.json(task);
 });
+
 //metodo para actualizar un registro de la base de datos
 router.put('/:id', async (req,res) => {
     const { title, description } = req.body;
@@ -54,6 +50,5 @@ router.get('/:id', async (req,res) => {
     res.json(task);
 
 });
-
 
 module.exports=router;
