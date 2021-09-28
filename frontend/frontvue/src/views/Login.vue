@@ -1,7 +1,7 @@
 <template>
   <div id="dashboard">
-    <Inicio/>
-    
+    <Header/> 
+    <Inicio/>    
   </div>
 </template>
 
@@ -9,12 +9,13 @@
 <script>
 // @ is an alias to /src
 import Inicio from '@/components/Inicio.vue'
-
+import Header from '@/components/Header.vue'
 
 export default {
   name: 'Login',
   components: {
     Inicio,    
+    Header,  
   }
 }
 </script>

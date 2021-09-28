@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Task = require('../models/task');
 
+
 //obtiene una consulta a la base de datos en el navegador
 router.get('/', async (req, res) => {
     const tasks = await Task.find();
@@ -18,6 +19,8 @@ router.post('/', async (req, res) =>{
     //res.json('recibido');
     res.json({status: 'tarea guardada'});
 });
+
+
 
 //envia una peticion a el frontend para asi editar los datos
 router.get('/:id', async (req, res) => {
@@ -44,11 +47,6 @@ router.delete('/:id', async (req,res) => {
 
 });
 
-router.get('/:id', async (req,res) => {
 
-    const task = await Task.findById(req.params.id);
-    res.json(task);
-
-});
 
 module.exports=router;
