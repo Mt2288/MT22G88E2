@@ -9,12 +9,10 @@ import Usuarios from '../views/Usuarios.vue'
 
 
 
+
+
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
+
   {
     path: '/dashboard',
     name: 'Dashboard',
@@ -39,11 +37,6 @@ const routes = [
     path: '/productos',
     name: 'Productos',
     component: Productos,
-  },
-  {
-    path: '*',
-    name: 'error',
-    component: Error
   }
   
 ]
