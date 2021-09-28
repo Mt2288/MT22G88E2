@@ -27,7 +27,6 @@ app.use('/nuevousuario' ,require('./routes/crear.routes'));
 app.use('/login' ,require('./routes/login.routes'));
 
 //static files archivos que van en la carpeta public html css javascript que son la pagina inicial de la pagina web
-
 //path.join(__dirname, 'public') selecciona la ruta de la carpeta actual y le agrega la ruta public  que es donde esta el archivo html que se mostrara
 
 app.use(express.static(path.join(__dirname, 'public')));

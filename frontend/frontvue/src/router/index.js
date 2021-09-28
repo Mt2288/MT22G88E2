@@ -6,9 +6,9 @@ import Creacion from '../views/Creacion.vue'
 import Productos from '../views/Productos.vue'
 import Usuarios from '../views/Usuarios.vue'
 
-
-
-
+//import Vue from 'vue'
+//import VueRouter from 'vue-router'
+//Vue.use(VueRouter)
 
 
 const routes = [
@@ -16,7 +16,8 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta: { requiresAuth: true}
   },
   {
     path: '/loging',
@@ -32,11 +33,13 @@ const routes = [
     path: '/usuarios',
     name: 'Usuarios',
     component: Usuarios,
+    meta: { requiresAuth: true}
   },
   {
     path: '/productos',
     name: 'Productos',
     component: Productos,
+    meta: { requiresAuth: true}
   }
   
 ]
@@ -47,7 +50,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next)=>{
-  if(to.meta.requiresAuth){
+  if(to.matched.some(route => route.meta.requiresAuth)){
     if (!localStorage.getItem('token')) {
       next({
         name: 'Login'
