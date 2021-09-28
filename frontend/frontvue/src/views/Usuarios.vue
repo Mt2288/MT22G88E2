@@ -3,7 +3,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
       <!-- Sidebar -->
-      <AppSidebar/>
+      <AppSidebar />
       <!-- End of Sidebar -->
 
       <!-- Content Wrapper -->
@@ -11,17 +11,21 @@
         <!-- Main Content -->
         <div id="content">
           <!-- Topbar -->
-          <Header/>
+          <Header />
           <!-- End of Topbar -->
 
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <!-- Page Heading -->
-            <div
-              class="d-sm-flex align-items-center justify-content-between mb-4"
-            >
-              <h1 class="h3 mb-0 text-gray-800">Usuarios</h1>
+            <div class="d-sm-flex align-items-center justify-content-left mb-4">
+              <h1 class="h3 mb-0 text-gray-800">
+                Usuarios
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-plus-circle"></i> Nuevo
+                </button>
+              </h1>
             </div>
+            <UsersTable></UsersTable>
           </div>
           <!-- /.container-fluid -->
         </div>
@@ -80,11 +84,13 @@
 <script>
 import Header from "@/components/Header.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
+import UsersTable from "@/components/UsersTable.vue";
 export default {
-  name: 'Usuarios',
+  name: "Usuarios",
   components: {
     Header,
     AppSidebar,
+    UsersTable,
   },
 };
 </script>
