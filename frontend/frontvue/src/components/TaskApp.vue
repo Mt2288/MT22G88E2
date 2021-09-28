@@ -79,7 +79,7 @@ export default {
         return{
             task : new Task(),
             tasks: [],
-            edit: false,
+            edit: false, 
             taskToEdit: ''
         }
     },

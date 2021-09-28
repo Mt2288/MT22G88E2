@@ -1,6 +1,5 @@
 <template>
-  <div id="navegacion">
-    
+  <div id="navegacion">   
 
   </div>
   <router-view/>
@@ -11,7 +10,6 @@
   height: 10vh; 
 
 }
-
 
 #nav {
   padding: 100px;
