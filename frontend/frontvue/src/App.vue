@@ -1,8 +1,7 @@
 <template>
   <div id="navegacion">   
-
+      <router-view/>
   </div>
-  <router-view/>
 </template>
 
 <style scoped>

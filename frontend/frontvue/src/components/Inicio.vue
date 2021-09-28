@@ -10,7 +10,7 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Iniciar sesion</h3></div>
                                     <div class="card-body">
-                                        <form v-on:submit.prevent="registrar">
+                                        <form v-on:submit.prevent="iniciar">
                                           
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputEmail" type="email" placeholder="usuario" v-model="usuario"/>
@@ -79,7 +79,7 @@ export default {
       }
   },
   methods: {
-      registrar(){
+      iniciar(){
           let json = {
              
               "usuario": this.usuario,
@@ -88,12 +88,14 @@ export default {
           axios.post('http://localhost:5000/login/', json)
           .then((data) => {
               if(data.data.status == "ok"){
-                localStorage.setItem('token', data.data.token)
-               this.$router.push("/Dashboard");          
+                localStorage.setItem('token', data.data.token);
+                console.log(localStorage.getItem('token'));
+                alert('Inicio de sesion exitoso');
+                this.$router.push("/Dashboard");          
 
               }else{
-                  this.error=true
-                  this.error_msg=data.data.result.error_msg
+                  this.error=true;
+                  this.error_msg=data.data.status;
               }
             
           });
