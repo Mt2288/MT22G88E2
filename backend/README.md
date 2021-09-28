@@ -1,1 +1,1 @@
-# MT22G88E2
+usar npm start PARA INICIAR EL BACKEND
