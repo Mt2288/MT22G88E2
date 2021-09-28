@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Creacion from '../views/Creacion.vue'
 import Productos from '../views/Productos.vue'
 import Usuarios from '../views/Usuarios.vue'
+import Error from '@/views/Error404';
 
 //import Vue from 'vue'
 //import VueRouter from 'vue-router'
@@ -17,10 +18,10 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
-    meta: { requiresAuth: true}
+    meta: { requiresAuth: true }
   },
   {
-    path: '/loging',
+    path: '/',
     name: 'Login',
     component: Login
   },
@@ -33,15 +34,21 @@ const routes = [
     path: '/usuarios',
     name: 'Usuarios',
     component: Usuarios,
-    meta: { requiresAuth: true}
+    meta: { requiresAuth: true }
   },
   {
     path: '/productos',
     name: 'Productos',
     component: Productos,
-    meta: { requiresAuth: true}
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'error',
+    component: Error,
+    meta: { requiresAuth: false }
   }
-  
+
 ]
 
 const router = createRouter({
@@ -49,17 +56,17 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next)=>{
-  if(to.matched.some(route => route.meta.requiresAuth)){
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(route => route.meta.requiresAuth)) {
     if (!localStorage.getItem('token')) {
       next({
         name: 'Login'
-      });      
-    }else{
+      });
+    } else {
       next()
     }
 
-  }else{
+  } else {
     next();
   }
 });

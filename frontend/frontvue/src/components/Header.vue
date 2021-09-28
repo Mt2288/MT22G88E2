@@ -78,11 +78,16 @@
 
 <script>
 export default {
-  name: 'Header',
-}
+  name: "Header",
+  data() {
+    return {
+      user: {},
+      loaded: false,
+    };
+  },
+};
 </script>
 
 
 <style>
-
 </style>
