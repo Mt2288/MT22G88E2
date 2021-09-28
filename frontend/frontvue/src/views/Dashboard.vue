@@ -3,7 +3,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
       <!-- Sidebar -->
-      <app-sidebar></app-sidebar>
+      <AppSidebar/>
       <!-- End of Sidebar -->
 
       <!-- Content Wrapper -->
@@ -11,7 +11,7 @@
         <!-- Main Content -->
         <div id="content">
           <!-- Topbar -->
-          <app-header></app-header>
+          <Header/>
           <!-- End of Topbar -->
 
           <!-- Begin Page Content -->
@@ -21,7 +21,9 @@
               class="d-sm-flex align-items-center justify-content-between mb-4"
             >
               <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+               
             </div>
+            <TaskApp/>
           </div>
           <!-- /.container-fluid -->
         </div>
@@ -80,12 +82,24 @@
 <script>
 import Header from "@/components/Header.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
+import TaskApp from "@/components/TaskApp.vue";
 
 export default {
 name: 'Dashboard',
   components: {
     Header,
     AppSidebar,
+    TaskApp,
   },
 };
 </script>
+
+<style scoped>
+#dashboard h1 {
+  text-align: center; 
+  width: 100%;
+  padding: 1%;
+  height: 10vh;  
+}
+
+</style>
