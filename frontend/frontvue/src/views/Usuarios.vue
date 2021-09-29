@@ -20,12 +20,18 @@
             <div class="d-sm-flex align-items-center justify-content-left mb-4">
               <h1 class="h3 mb-0 text-gray-800">
                 Usuarios
-                <button class="btn btn-primary" type="button">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalFormUsuario"
+                >
                   <i class="fas fa-plus-circle"></i> Nuevo
                 </button>
               </h1>
             </div>
             <UsersTable></UsersTable>
+            <ModalUsers></ModalUsers>
           </div>
           <!-- /.container-fluid -->
         </div>
@@ -85,12 +91,14 @@
 import Header from "@/components/Header.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
 import UsersTable from "@/components/UsersTable.vue";
+import ModalUsers from "@/components/ModalUsers.vue";
 export default {
   name: "Usuarios",
   components: {
     Header,
     AppSidebar,
     UsersTable,
+    ModalUsers,
   },
 };
 </script>

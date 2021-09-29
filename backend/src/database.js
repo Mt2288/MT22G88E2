@@ -5,10 +5,9 @@ const URI = 'mongodb+srv://jaiber:nintendo64@freecluster.2o9li.mongodb.net/myFir
 
 //MENSAJE DE CONEXION EXITOSA
 mongoose.connect(URI)
-    .then(db => console.log('base esta conectada'))
-        
+    .then(db => console.log('base de datos esta conectada'))
+
     .catch(err => console.error(err));
 
 module.exports = mongoose;
-        
-    
+
