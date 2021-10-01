@@ -90,7 +90,7 @@ export default {
         
         addTask() {
             if (this.edit === false) {
-            fetch('http://localhost:5000/api/tasks',{
+            fetch('http://localhost:5000/',{
                 method: 'POST',
                 body: JSON.stringify(this.task),
                 headers: {
@@ -105,7 +105,7 @@ export default {
 
                 
             } else {
-                fetch('http://localhost:5000/api/tasks/' + this.taskToEdit, {
+                fetch('http://localhost:5000/' + this.taskToEdit, {
                     method:'PUT',
                     body: JSON.stringify(this.task),
                     headers: {
@@ -124,7 +124,7 @@ export default {
             this.task = new Task;
         },
         getTasks() {
-            fetch('http://localhost:5000/api/tasks')
+            fetch('http://localhost:5000/')
             .then(res => res.json())
             .then(data => {
                 this.tasks =data;
@@ -132,7 +132,7 @@ export default {
             });
         },
         deleteTask(id){
-            fetch('http://localhost:5000/api/tasks/' + id,{
+            fetch('http://localhost:5000/' + id,{
                 method: 'DELETE',
                 headers: {
                     'Accept' : 'application/json',
@@ -146,7 +146,7 @@ export default {
 
         },
         actualizarTask(id){
-            fetch('http://localhost:5000/api/tasks/' + id)
+            fetch('http://localhost:5000/' + id)
             .then(res => res.json())
             .then(data => {
                 this.task =new Task(data.title, data.description);

@@ -88,7 +88,7 @@ export default {
               "usuario": this.usuario,
               "password":this.password
           }
-          axios.post('http://localhost:5000/nuevousuario/', json)
+          axios.post('http://localhost:5000/register/', json)
           .then((data) => {
               if(data.data.status == "ok"){
                   console.log("bien")
@@ -97,7 +97,7 @@ export default {
                   this.error_msg=data.data.result.error_msg
               }
           });
-          this.$router.push("/loging");
+          this.$router.push("/");
       }
   }
 

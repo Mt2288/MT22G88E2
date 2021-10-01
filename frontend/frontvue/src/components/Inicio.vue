@@ -87,6 +87,8 @@ export default {
         password: this.password,
       };
       axios.post("http://localhost:5000/login/", json).then((data) => {
+
+     
         if (data.data.status == "ok") {
           localStorage.setItem("token", data.data.token);
           console.log(localStorage.getItem("token"));
@@ -100,6 +102,10 @@ export default {
 
       this.$router.push("/");
     },
+
+
+
+    
   },
 };
 </script>
