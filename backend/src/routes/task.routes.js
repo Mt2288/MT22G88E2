@@ -1,12 +1,14 @@
 const express = require('express');
+const login = require('../models/login');
 const router = express.Router();
+const authService = require('../services/auth.service')
 
 const Task = require('../models/task');
 
 
 //obtiene una consulta a la base de datos en el navegador
 router.get('/', async (req, res) => {
-    const tasks = await Task.find();
+    const tasks = await login.find();
  
     res.json(tasks);
 });
@@ -46,6 +48,41 @@ router.delete('/:id', async (req,res) => {
     res.json({status: 'eliminado'});
 
 });
+
+
+
+
+//LOGIN Y REGISTRO/////////////
+
+router.post('/login', async (req, res) => {
+  try {
+    const { usuario, password } = req.body;
+    if(!usuario || !password){
+        return res.status(400).json('email and password required');
+    }
+    let token = await authService.login(req.body);
+    if(token){
+        res.status(token.code).json(token);
+    }
+} catch (error) {
+    res.send(error);
+}
+  })
+
+
+  
+  router.post('/register', async (req, res) => {
+    try {
+      const user = new login(req.body);
+      const userSaved = await authService.register(user);
+      res.send(userSaved);
+    } catch (error) {
+      res.send(error);
+    }
+  })
+
+
+
 
 
 
