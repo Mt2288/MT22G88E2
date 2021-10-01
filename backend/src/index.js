@@ -22,9 +22,8 @@ app.set('port', process.env.PORT || 5000);
 app.use(morgan('dev'));
 app.use(express.json());
 //rutas aqui se colocan las rutas de la pagina web
-app.use('/api/tasks' ,require('./routes/task.routes'));
-app.use('/nuevousuario' ,require('./routes/crear.routes'));
-app.use('/login' ,require('./routes/login.routes'));
+app.use('/' ,require('./routes/task.routes'));
+
 
 //static files archivos que van en la carpeta public html css javascript que son la pagina inicial de la pagina web
 //path.join(__dirname, 'public') selecciona la ruta de la carpeta actual y le agrega la ruta public  que es donde esta el archivo html que se mostrara
