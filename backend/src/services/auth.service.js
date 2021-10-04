@@ -1,29 +1,31 @@
 const jwt = require('jsonwebtoken')
-const User = require('../models/login')
+const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
 
 const authService = {
     signToken: async function (id) {
         return jwt.sign({ id }, 'my app', {
-            expiresIn: 60 * 60 * 1
+            expiresIn: 60 * 60 * 24
         })
     },
-    login: async function(data){
+    login: async function (data) {
         try {
-            const { usuario, password } = data;
-
-            let userExists = await User.findOne({ usuario: usuario });
-
-            if(!userExists){
+            const { email, password } = data;
+            let userExists = await User.findOne({
+                where: {
+                    email: email,
+                }
+            });
+            if (!userExists) {
                 return {
                     code: 400,
                     error: true,
                     msg: "User or password incorrect"
                 }
             }
-            let pass = await bcrypt.compare(password, userExists.password)           
-            if(!pass){
+            let pass = await bcrypt.compare(password, userExists.password)
+            if (!pass) {
                 return {
                     code: 400,
                     error: true,
@@ -33,9 +35,9 @@ const authService = {
 
             const token = await this.signToken(userExists.id);
             return {
-                status:"ok",
+                status: "ok",
                 user: userExists,
-                code:200,
+                code: 200,
                 token
             }
         } catch (error) {
@@ -49,7 +51,6 @@ const authService = {
             const user = await userData.save();
             let token = await this.signToken(userData._id)
             return {
-
                 user: userData,
                 code: 200,
                 token

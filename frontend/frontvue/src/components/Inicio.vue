@@ -21,7 +21,7 @@
                             id="inputEmail"
                             type="email"
                             placeholder=""
-                            v-model="usuario"
+                            v-model="email"
                           />
                           <label for="inputEmail">Correo electrónico</label>
                         </div>
@@ -47,6 +47,7 @@
                           <input
                             type="submit"
                             class="btn btn-primary"
+                            @click="login"
                             value="Iniciar sesión"
                           />
                         </div>
@@ -73,7 +74,7 @@ export default {
   components: {},
   data: function () {
     return {
-      usuario: "",
+      email: "",
       password: "",
 
       error: false,
@@ -83,12 +84,10 @@ export default {
   methods: {
     iniciar() {
       let json = {
-        usuario: this.usuario,
+        email: this.email,
         password: this.password,
       };
       axios.post("http://localhost:5000/login/", json).then((data) => {
-
-     
         if (data.data.status == "ok") {
           localStorage.setItem("token", data.data.token);
           console.log(localStorage.getItem("token"));
@@ -102,10 +101,6 @@ export default {
 
       this.$router.push("/");
     },
-
-
-
-    
   },
 };
 </script>
