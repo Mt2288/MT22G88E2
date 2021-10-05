@@ -31,6 +31,7 @@
               </h1>
             </div>
             <UsersTable></UsersTable>
+
             <ModalUsers></ModalUsers>
           </div>
           <!-- /.container-fluid -->
@@ -92,6 +93,7 @@ import Header from "@/components/Header.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
 import UsersTable from "@/components/UsersTable.vue";
 import ModalUsers from "@/components/ModalUsers.vue";
+
 export default {
   name: "Usuarios",
   components: {
