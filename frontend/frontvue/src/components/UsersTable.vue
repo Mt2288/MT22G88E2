@@ -3,35 +3,41 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-          <th scope="col">Acciones</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Correo Electronico</th>
+          <th scope="col">Tipo de usuario</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
           <td></td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      users: [],
+    };
+  },
+  created() {
+    const apiUrl = "http://localhost:5000/";
+    axios
+      .get(apiUrl)
+      .then((res) => {
+        this.users = res.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+};
+</script>
