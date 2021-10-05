@@ -50,6 +50,9 @@
                             @click="login"
                             value="Iniciar sesión"
                           />
+                          <a  class="btn " :href="'/crearusuario'">
+                            <span>Registrarse</span>
+                          </a>
                         </div>
                       </form>
                       <div class="alert alert-danger" role="alert" v-if="error">

@@ -10,33 +10,29 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Documento</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Telefono</th>
-                                <th>Correo</th>
-                                <th>Estado</th>
-                                <th>Contraseña</th>
-                                <th>Estatus</th>                                                                                                
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Nombre</th>
+                                <th>Valor</th>
+                                <th>Cantidad</th>
+                                                                                              
                             </tr>
 
                         </thead>
                         <tbody>
                             <tr v-for="task in tasks" v-bind:key="task.id">
                                 <td>{{task.identificacion}}</td>
-                                <td>{{task.name}}</td>
-                                <td>{{task.lastname}}</td>
-                                <td>{{task.telephone}}</td>
-                                <td>{{task.email}}</td>
-                                <td>{{task.typeuser}}</td>
-                                <td>{{task.password}}</td>                                  
-                                <td>{{task.status}}</td>
+                                <td>{{task.tipo}}</td>
+                                <td>{{task.nombre}}</td>
+                                <td>{{task.valor}}</td>
+                                <td>{{task.cantidad}}</td>
+
                             
                                 <td>
                                     <button @click="deleteTask(task._id)" class="btn btn-danger">                                        
                                         Borrar
                                     </button>
-                                    <button data-bs-target="#modalFormUsuario" data-bs-toggle="modal" @click="actualizarTask(task._id)" class="btn btn-secondary">
+                                    <button data-bs-target="#modalFormProductos" data-bs-toggle="modal" @click="actualizarTask(task._id)" class="btn btn-secondary">
                                         Actualizar
                                     </button>
                                 </td>
@@ -59,19 +55,17 @@
 //import ModalUsers from "@/components/ModalUsers.vue";
 
 class Task{
-    constructor(identificacion, name, lastname, telephone, email, typeuser, status, password){
+    constructor(identificacion, tipo, nombre, valor, cantidad){
         this.identificacion = identificacion;
-        this.name = name;
-        this.lastname = lastname;
-        this.telephone = telephone;
-        this.email = email;
-        this.typeuser = typeuser;
-        this.status = status;
-        this.password = password;       
+        this.tipo = tipo;
+        this.nombre = nombre;
+        this.valor = valor;
+        this.cantidad = cantidad;
+      
     }
 }
 export default {
-    name: 'UsersTable',
+    name: 'ProductsTable',
     components: {
     //ModalUsers,
   },    
@@ -90,7 +84,7 @@ export default {
     },
     methods: {  
         getTasks() {
-            fetch('http://localhost:5000/')
+            fetch('http://localhost:5000/productos')
             .then(res => res.json())
             .then(data => {
                 this.tasks =data;
@@ -98,7 +92,7 @@ export default {
             });
         },
         deleteTask(id){
-            fetch('http://localhost:5000/' + id,{
+            fetch('http://localhost:5000/productos/' + id,{
                 method: 'DELETE',
                 headers: {
                     'Accept' : 'application/json',

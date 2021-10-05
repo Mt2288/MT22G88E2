@@ -12,13 +12,34 @@
                                     <div class="card-body">
                                         <form v-on:submit="registrar">
                                             <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputNombre" type="number" placeholder="identificacion" v-model="identificacion"/>
+                                                <label for="inputNombre">identificacion</label>
+                                            </div>                                             
+                                            <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputNombre" type="text" placeholder="nombre" v-model="nombre"/>
                                                 <label for="inputNombre">Nombre</label>
-                                            </div>                                            
+                                            </div>         
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputNombre" type="text" placeholder="lastname" v-model="lastname"/>
+                                                <label for="inputNombre">Apellido</label>
+                                            </div>                                               
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputNombre" type="text" placeholder="telephone" v-model="telephone"/>
+                                                <label for="inputNombre">Telefono</label>
+                                            </div>                                              
+                                                                              
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputEmail" type="email" placeholder="usuario" v-model="usuario"/>
                                                 <label for="inputEmail">Email address</label>
                                             </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputEmail" type="text" placeholder="typeusername" v-model="typeusername"/>
+                                                <label for="inputEmail">TIpo de usuario</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputEmail" type="text" placeholder="status" v-model="status"/>
+                                                <label for="inputEmail">Estatus</label>
+                                            </div>                                                                                        
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputPassword" type="password" placeholder="password" v-model="password"/>
                                                 <label for="inputPassword">Password</label>
@@ -84,8 +105,13 @@ export default {
   methods: {
       registrar(){
           let json = {
-              "nombre": this.nombre,
-              "usuario": this.usuario,
+              "identificacion": this.identificacion,              
+              "name": this.nombre,
+              "lastname": this.lastname,
+              "telephone": this.telephone,
+              "email": this.usuario,
+              "typeusername": this.typeusername,              
+              "status": this.status,                            
               "password":this.password
           }
           axios.post('http://localhost:5000/register/', json)
