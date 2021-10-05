@@ -20,30 +20,33 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="formUsuario" name="formUsuario" class="form-horizontal">
-            <input type="hidden" id="idUsuario" name="idUsuario" value="" />
+          <form
+            id="formaProductos"
+            name="formProductos"
+            class="form-horizontal"
+          >
+            <input type="hidden" id="idProducto" name="idProducto" value="" />
             <p class="text-primary">Todos los campos son obligatorios.</p>
-
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="txtNombre">ID</label>
+                <label for="txtCode">Código de producto</label>
                 <input
-                  type="number"
+                  type="text"
                   class="form-control valid validText"
-                  name="txtNombre"
-                  id="txtNombre"
-                  v-model="form.identificacion"
+                  name="txtCode"
+                  id="txtCode"
+                  v-model="form.code"
                   required
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="txtNombre">Tipo</label>
+                <label for="txtNombre">Nombre</label>
                 <input
                   type="text"
                   class="form-control valid validText"
                   name="txtNombre"
                   id="txtNombre"
-                  v-model="form.tipo"
+                  v-model="form.name"
                   required
                 />
               </div>
@@ -51,24 +54,24 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="txtApellido">Nombre</label>
+                <label for="txtMarca">Marca</label>
                 <input
                   type="text"
                   class="form-control valid validText"
-                  name="txtApellido"
-                  id="txtApellido"
-                  v-model="form.nombre"
+                  name="txtMarca"
+                  id="txtMarca"
+                  v-model="form.marca"
                   required
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="txtTelefono">Valor</label>
+                <label for="txtCategoria">Categoría</label>
                 <input
-                  type="number"
+                  type="text"
                   class="form-control valid validNumber"
-                  name="txtTelefono"
-                  id="txtTelefono"
-                  v-model="form.valor"
+                  name="txtCategoria"
+                  id="txtCategoria"
+                  v-model="form.category"
                   required
                 />
               </div>
@@ -76,15 +79,41 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="txtEmail">Cantidad</label>
+                <label for="txtStock">Stock</label>
                 <input
                   type="number"
                   class="form-control valid validEmail"
-                  name="txtEmail"
-                  id="txtEmail"
-                  v-model="form.cantidad"
+                  name="txtStock"
+                  id="txtStock"
+                  v-model="form.stock"
                   required
                 />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="txtPrecio">Precio</label>
+                <input
+                  type="number"
+                  class="form-control valid validEmail"
+                  name="txtPrecio"
+                  id="txtPrecio"
+                  v-model="form.precio"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="listStatus">Estado</label>
+                <select
+                  class="form-control selectpicker"
+                  name="listStatus"
+                  id="listStatus"
+                  v-model="form.status"
+                >
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
               </div>
             </div>
 
@@ -120,22 +149,26 @@ export default {
   data() {
     return {
       form: {
-        identificacion: "",
-        tipo: "",
-        nombre: "",
-        valor: "",
-        cantidad: "",
+        code: "",
+        name: "",
+        marca: "",
+        category: "",
+        stock: "",
+        precio: "",
+        status: "",
       },
     };
   },
   methods: {
     login() {
       let formData = new URLSearchParams();
-      formData.append("identificacion", this.form.identificacion);
-      formData.append("tipo", this.form.tipo);
-      formData.append("nombre", this.form.nombre);
-      formData.append("valor", this.form.valor);
-      formData.append("cantidad", this.form.cantidad);
+      formData.append("code", this.form.code);
+      formData.append("name", this.form.name);
+      formData.append("marca", this.form.marca);
+      formData.append("category", this.form.category);
+      formData.append("stock", this.form.stock);
+      formData.append("precio", this.form.precio);
+      formData.append("status", this.form.status);
       axios
         .post("http://localhost:5000/productos", formData, {
           headers: {
@@ -147,7 +180,7 @@ export default {
         });
     },
     alerta: function () {
-      alert("Datos guardados correctamente");
+      alert("Producto guardado correctamente");
     },
   },
 };

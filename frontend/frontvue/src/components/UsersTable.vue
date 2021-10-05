@@ -6,7 +6,7 @@
           <div class="tile-body">
             <div class="table-responsive">
               <table class="table table-striped table-hover">
-                <thead>
+                <thead class="table-white">
                   <tr>
                     <th>Documento</th>
                     <th>Nombres</th>
@@ -42,7 +42,7 @@
                       <button
                         data-bs-target="#modalFormUsuario"
                         data-bs-toggle="modal"
-                        class="btn btn-primary btn-sm"
+                        class="btn btn-secondary btn-sm"
                         @click="actualizarTask(task._id)"
                         title="Editar"
                       >

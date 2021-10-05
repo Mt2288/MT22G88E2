@@ -6,32 +6,50 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Tipo</th>
+                <th>Código</th>
                 <th>Nombre</th>
-                <th>Valor</th>
-                <th>Cantidad</th>
+                <th>Marca</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="task in tasks" v-bind:key="task.id">
-                <td>{{ task.identificacion }}</td>
-                <td>{{ task.tipo }}</td>
-                <td>{{ task.nombre }}</td>
-                <td>{{ task.valor }}</td>
-                <td>{{ task.cantidad }}</td>
+                <td>{{ task.code }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.marca }}</td>
+                <td>{{ task.category }}</td>
+                <td>{{ task.stock }}</td>
+                <td>{{ task.precio }}</td>
+                <td>
+                  <span
+                    v-if="task.status == 'Activo'"
+                    class="badge badge-pill badge-success"
+                  >
+                    {{ task.status }}</span
+                  >
+                  <span v-else class="badge badge-pill badge-danger">
+                    {{ task.status }}</span
+                  >
+                </td>
 
                 <td>
-                  <button @click="deleteTask(task._id)" class="btn btn-danger">
-                    Borrar
-                  </button>
                   <button
                     data-bs-target="#modalFormProductos"
                     data-bs-toggle="modal"
                     @click="actualizarTask(task._id)"
-                    class="btn btn-secondary"
+                    class="btn btn-secondary btn-sm"
                   >
-                    Actualizar
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    @click="deleteTask(task._id)"
+                    class="btn btn-danger btn-sm"
+                  >
+                    <i class="far fa-trash-alt" aria-hidden="true"></i>
                   </button>
                 </td>
               </tr>
@@ -46,12 +64,14 @@
 <script>
 //import ModalUsers from "@/components/ModalUsers.vue";
 class Task {
-  constructor(identificacion, tipo, nombre, valor, cantidad) {
-    this.identificacion = identificacion;
-    this.tipo = tipo;
-    this.nombre = nombre;
-    this.valor = valor;
-    this.cantidad = cantidad;
+  constructor(code, name, marca, category, stock, precio, status) {
+    this.code = code;
+    this.name = name;
+    this.marca = marca;
+    this.category = category;
+    this.stock = stock;
+    this.precio = precio;
+    this.status = status;
   }
 }
 export default {
