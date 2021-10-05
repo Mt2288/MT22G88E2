@@ -50,6 +50,9 @@
                             @click="login"
                             value="Iniciar sesión"
                           />
+                          <a class="btn" :href="'/crearusuario'">
+                            <span>Registrarse</span>
+                          </a>
                         </div>
                       </form>
                       <div class="alert alert-danger" role="alert" v-if="error">
@@ -76,7 +79,6 @@ export default {
     return {
       email: "",
       password: "",
-
       error: false,
       error_msg: "",
     };
@@ -98,7 +100,6 @@ export default {
           this.error_msg = data.data.status;
         }
       });
-
       this.$router.push("/");
     },
   },

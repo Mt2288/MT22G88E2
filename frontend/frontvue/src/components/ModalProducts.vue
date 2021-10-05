@@ -1,7 +1,7 @@
 <template>
   <div
     class="modal fade"
-    id="modalFormUsuario"
+    id="modalFormProductos"
     tabindex="-1"
     role="dialog"
     aria-hidden="true"
@@ -9,7 +9,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header headerRegister">
-          <h5 class="modal-tittle" id="titleModal">Nuevo Usuario</h5>
+          <h5 class="modal-tittle" id="titleModal">Nuevo Producto</h5>
           <button
             type="button"
             class="close"
@@ -26,24 +26,24 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="txtIdentificacion">No. de documento</label>
+                <label for="txtNombre">ID</label>
                 <input
-                  type="text"
-                  class="form-control valid validNumber"
-                  id="txtIdentificacion"
-                  name="txtIdentificacion"
+                  type="number"
+                  class="form-control valid validText"
+                  name="txtNombre"
+                  id="txtNombre"
                   v-model="form.identificacion"
                   required
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="txtNombre">Nombres</label>
+                <label for="txtNombre">Tipo</label>
                 <input
                   type="text"
                   class="form-control valid validText"
                   name="txtNombre"
                   id="txtNombre"
-                  v-model="form.name"
+                  v-model="form.tipo"
                   required
                 />
               </div>
@@ -51,24 +51,24 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="txtApellido">Apellidos</label>
+                <label for="txtApellido">Nombre</label>
                 <input
                   type="text"
                   class="form-control valid validText"
                   name="txtApellido"
                   id="txtApellido"
-                  v-model="form.lastname"
+                  v-model="form.nombre"
                   required
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="txtTelefono">Teléfono</label>
+                <label for="txtTelefono">Valor</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control valid validNumber"
                   name="txtTelefono"
                   id="txtTelefono"
-                  v-model="form.telephone"
+                  v-model="form.valor"
                   required
                 />
               </div>
@@ -76,52 +76,14 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="txtEmail">Correo electrónico</label>
+                <label for="txtEmail">Cantidad</label>
                 <input
-                  type="email"
+                  type="number"
                   class="form-control valid validEmail"
                   name="txtEmail"
                   id="txtEmail"
-                  v-model="form.email"
+                  v-model="form.cantidad"
                   required
-                />
-              </div>
-              <div class="form-group col-md-6">
-                <label for="listRolid">Tipo de usuario</label>
-                <select
-                  class="form-control"
-                  name="listRolid"
-                  id="listRolid"
-                  v-model="form.typeusername"
-                  required
-                >
-                  <option value="Administrador">Administrador</option>
-                  <option value="Vendedor">Vendedor</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="listStatus">Estado</label>
-                <select
-                  class="form-control selectpicker"
-                  name="listStatus"
-                  id="listStatus"
-                  v-model="form.status"
-                >
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo">Inactivo</option>
-                </select>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="txtPassword">Contraseña</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  name="txtPassword"
-                  id="pass"
-                  v-model="form.password"
                 />
               </div>
             </div>
@@ -159,13 +121,10 @@ export default {
     return {
       form: {
         identificacion: "",
-        name: "",
-        lastname: "",
-        telephone: "",
-        email: "",
-        typeusername: "",
-        status: "",
-        password: "",
+        tipo: "",
+        nombre: "",
+        valor: "",
+        cantidad: "",
       },
     };
   },
@@ -173,15 +132,12 @@ export default {
     login() {
       let formData = new URLSearchParams();
       formData.append("identificacion", this.form.identificacion);
-      formData.append("name", this.form.name);
-      formData.append("lastname", this.form.lastname);
-      formData.append("telephone", this.form.telephone);
-      formData.append("email", this.form.email);
-      formData.append("typeusername", this.form.typeusername);
-      formData.append("status", this.form.status);
-      formData.append("password", this.form.password);
+      formData.append("tipo", this.form.tipo);
+      formData.append("nombre", this.form.nombre);
+      formData.append("valor", this.form.valor);
+      formData.append("cantidad", this.form.cantidad);
       axios
-        .post("http://localhost:5000/register", formData, {
+        .post("http://localhost:5000/productos", formData, {
           headers: {
             "Access-Control-Allow_Methods": "POST",
           },
