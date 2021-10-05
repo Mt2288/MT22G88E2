@@ -7,11 +7,7 @@ const TaskSchema = new Schema({
     tipo: { type: String, required: true },
     nombre: { type: String, required: true },
     valor: { type: Number, required: true },
-    cantidad: { type: Number, required: true }
-});
-
-
-
+})
 //EXPORTACION DEL MODULO
 
 module.exports = mongoose.model('Task', TaskSchema);
