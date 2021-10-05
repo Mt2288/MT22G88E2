@@ -92,15 +92,13 @@ import Header from "@/components/Header.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
 import ProductsTable from "@/components/ProductsTable.vue";
 import ModalProducts from "@/components/ModalProducts.vue";
-
-
 export default {
   name: "Productos",
   components: {
     Header,
     AppSidebar,
     ProductsTable,
-    ModalProducts
+    ModalProducts,
   },
 };
 </script>

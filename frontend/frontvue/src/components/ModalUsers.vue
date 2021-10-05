@@ -92,7 +92,7 @@
                   class="form-control"
                   name="listRolid"
                   id="listRolid"
-                  v-model="form.typeuser"
+                  v-model="form.typeusername"
                   required
                 >
                   <option value="Administrador">Administrador</option>
@@ -110,8 +110,8 @@
                   id="listStatus"
                   v-model="form.status"
                 >
-                  <option value="1">Activo</option>
-                  <option value="2">Inactivo</option>
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
                 </select>
               </div>
               <div class="form-group col-md-6">
@@ -163,7 +163,7 @@ export default {
         lastname: "",
         telephone: "",
         email: "",
-        typeuser: "",
+        typeusername: "",
         status: "",
         password: "",
       },
@@ -177,7 +177,7 @@ export default {
       formData.append("lastname", this.form.lastname);
       formData.append("telephone", this.form.telephone);
       formData.append("email", this.form.email);
-      formData.append("typeuser", this.form.typeuser);
+      formData.append("typeusername", this.form.typeusername);
       formData.append("status", this.form.status);
       formData.append("password", this.form.password);
       axios
