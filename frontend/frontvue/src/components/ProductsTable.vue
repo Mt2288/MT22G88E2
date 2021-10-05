@@ -35,7 +35,6 @@
                     {{ task.status }}</span
                   >
                 </td>
-
                 <td>
                   <button
                     data-bs-target="#modalFormProductos"
