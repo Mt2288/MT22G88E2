@@ -32,8 +32,8 @@
                   class="form-control valid validNumber"
                   id="txtIdentificacion"
                   name="txtIdentificacion"
+                  v-model="form.identificacion"
                   required
-                  onkeypress="return controlTag(event);"
                 />
               </div>
               <div class="form-group col-md-6">
@@ -43,6 +43,7 @@
                   class="form-control valid validText"
                   name="txtNombre"
                   id="txtNombre"
+                  v-model="form.name"
                   required
                 />
               </div>
@@ -56,6 +57,7 @@
                   class="form-control valid validText"
                   name="txtApellido"
                   id="txtApellido"
+                  v-model="form.lastname"
                   required
                 />
               </div>
@@ -66,8 +68,8 @@
                   class="form-control valid validNumber"
                   name="txtTelefono"
                   id="txtTelefono"
+                  v-model="form.telephone"
                   required
-                  onkeypress="return controlTag(event);"
                 />
               </div>
             </div>
@@ -80,6 +82,7 @@
                   class="form-control valid validEmail"
                   name="txtEmail"
                   id="txtEmail"
+                  v-model="form.email"
                   required
                 />
               </div>
@@ -89,8 +92,12 @@
                   class="form-control"
                   name="listRolid"
                   id="listRolid"
+                  v-model="form.typeuser"
                   required
-                ></select>
+                >
+                  <option value="Administrador">Administrador</option>
+                  <option value="Vendedor">Vendedor</option>
+                </select>
               </div>
             </div>
 
@@ -101,28 +108,40 @@
                   class="form-control selectpicker"
                   name="listStatus"
                   id="listStatus"
+                  v-model="form.status"
                 >
                   <option value="1">Activo</option>
                   <option value="2">Inactivo</option>
                 </select>
               </div>
-                            <div class="form-group col-md-6">
+              <div class="form-group col-md-6">
                 <label for="txtPassword">Contraseña</label>
                 <input
                   type="password"
                   class="form-control"
                   name="txtPassword"
-                  id="txtPassword"
+                  id="pass"
+                  v-model="form.password"
                 />
               </div>
             </div>
 
             <div class="tile-footer">
-              <button id="btnActionForm" class="btn btn-primary" type="submit">
+              <button
+                id="btnActionForm"
+                class="btn btn-primary"
+                type="button"
+                @click="login"
+                v-on:click="alerta"
+              >
                 <i class="fa fa-fw fa-lg fa-check-circle"></i
                 ><span id="btnText">Guardar</span></button
               >&nbsp;&nbsp;&nbsp;
-              <button class="btn btn-danger" type="button" data-dismiss="modal">
+              <button
+                class="btn btn-danger"
+                type="button"
+                data-bs-dismiss="modal"
+              >
                 <i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar
               </button>
             </div>
@@ -132,3 +151,48 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      form: {
+        identificacion: "",
+        name: "",
+        lastname: "",
+        telephone: "",
+        email: "",
+        typeuser: "",
+        status: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    login() {
+      let formData = new URLSearchParams();
+      formData.append("identificacion", this.form.identificacion);
+      formData.append("name", this.form.name);
+      formData.append("lastname", this.form.lastname);
+      formData.append("telephone", this.form.telephone);
+      formData.append("email", this.form.email);
+      formData.append("typeuser", this.form.typeuser);
+      formData.append("status", this.form.status);
+      formData.append("password", this.form.password);
+      axios
+        .post("http://localhost:5000/register", formData, {
+          headers: {
+            "Access-Control-Allow_Methods": "POST",
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    },
+    alerta: function () {
+      alert("Datos guardados correctamente");
+    },
+  },
+};
+</script>
