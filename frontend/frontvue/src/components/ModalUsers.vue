@@ -94,7 +94,10 @@
                   id="listRolid"
                   v-model="form.typeuser"
                   required
-                ></select>
+                >
+                  <option value="Administrador">Administrador</option>
+                  <option value="Vendedor">Vendedor</option>
+                </select>
               </div>
             </div>
 
