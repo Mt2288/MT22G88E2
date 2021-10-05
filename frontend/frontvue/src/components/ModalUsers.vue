@@ -130,7 +130,7 @@
               <button
                 id="btnActionForm"
                 class="btn btn-primary"
-                type="button"
+                type="submit"
                 @click="login"
                 v-on:click="alerta"
               >
@@ -167,6 +167,7 @@ export default {
         status: "",
         password: "",
       },
+      isModalVisible: false,
     };
   },
   methods: {

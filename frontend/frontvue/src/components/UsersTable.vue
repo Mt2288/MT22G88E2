@@ -42,7 +42,7 @@
                       <button
                         data-bs-target="#modalFormUsuario"
                         data-bs-toggle="modal"
-                        class="btn btn-primary btn-sm"
+                        class="btn btn-secondary btn-sm"
                         @click="actualizarTask(task._id)"
                         title="Editar"
                       >
