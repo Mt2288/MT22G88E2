@@ -43,7 +43,7 @@
                     Edit
                     </router-link>
                   <button
-                    @click="deleteTask(task._id)"
+                    @click.prevent="deleteTask(task._id)"
                     class="btn btn-danger btn-sm"
                   >
                     <i class="far fa-trash-alt" aria-hidden="true"></i>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 //import ModalUsers from "@/components/ModalUsers.vue";
 class Task {
   constructor(code, name, marca, category, stock, precio, status) {
@@ -98,17 +99,30 @@ export default {
         });
     },
     deleteTask(id) {
-      fetch("http://localhost:5000/productos/" + id, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          this.getTasks(data);
-        });
+      Swal.fire({
+        title: "Estas seguro?",
+        text: "¡No podrás revertir esto!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, bórralo!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch("http://localhost:5000/productos/" + id, {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+              "Content-type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              this.getTasks(data);
+              if (data.status == 200) this.success();
+            });
+        }
+      });
     },
     actualizarTask(id) {
       fetch("http://localhost:5000/" + id)

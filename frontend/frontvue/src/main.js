@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import Vuelidate from 'vuelidate'
 import router from './router'
 import store from './store'
 import "bootstrap"
@@ -13,4 +14,4 @@ import * as Vue from 'vue'
 createApp(App).use(store).use(router).mount('#app')
 
 const app = Vue.createApp(App)
-app.use(VueAxios, axios)
+app.use(VueAxios, axios, Vuelidate)

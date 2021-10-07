@@ -24,6 +24,7 @@
             id="formaProductos"
             name="formProductos"
             class="form-horizontal"
+            v-on:submit.prevent="login"
           >
             <input type="hidden" id="idProducto" name="idProducto" value="" />
             <p class="text-primary">Todos los campos son obligatorios.</p>
@@ -72,7 +73,7 @@
                   name="txtCategoria"
                   id="txtCategoria"
                   v-model="form.category"
-                  required
+                  required="true"
                 />
               </div>
             </div>
@@ -110,6 +111,7 @@
                   name="listStatus"
                   id="listStatus"
                   v-model="form.status"
+                  required
                 >
                   <option value="Activo">Activo</option>
                   <option value="Inactivo">Inactivo</option>
@@ -118,23 +120,19 @@
             </div>
 
             <div class="tile-footer">
-              <button
+              <input
+                type="submit"
                 id="btnActionForm"
                 class="btn btn-primary"
-                type="button"
-                @click="login"
-                v-on:click="alerta"
-              >
-                <i class="fa fa-fw fa-lg fa-check-circle"></i
-                ><span id="btnText">Guardar</span></button
-              >&nbsp;&nbsp;&nbsp;
-              <button
-                class="btn btn-danger"
-                type="button"
                 data-bs-dismiss="modal"
-              >
-                <i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar
-              </button>
+              />
+              &nbsp;&nbsp;
+              <input
+                type="submit"
+                value="Cerrar"
+                class="btn btn-danger"
+                data-bs-dismiss="modal"
+              />
             </div>
           </form>
         </div>
@@ -145,6 +143,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
@@ -176,11 +175,22 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          if (response.status == 200) this.success();
         });
     },
-    alerta: function () {
-      alert("Producto guardado correctamente");
+    success() {
+      Swal.fire({
+        icon: "success",
+        text: "Producto guardado correctamente",
+      }).then(() => {
+        this.$router.push("/productos");
+      });
+    },
+    error() {
+      Swal.fire({
+        icon: "error",
+        text: "Error!",
+      });
     },
   },
 };

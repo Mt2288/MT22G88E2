@@ -37,7 +37,6 @@
                         {{ task.status }}</span
                       >
                     </td>
-
                     <td>
                        <router-link
                          :to="{ name: 'UserUpdate', params: { id: task._id } }"
@@ -129,14 +128,13 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           this.task = new Task(
-            data.documento,
-            data.nombres,
-            data.apellidos,
-            data.telefono,
-            data.correo,
+            data.identificacion,
+            data.name,
+            data.lastname,
+            data.telephone,
+            data.email,
             data.typeusername,
-            data.estado,
-            data.password
+            data.status
           );
           this.taskToEdit = data._id;
           this.edit = true;
@@ -147,6 +145,33 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
+    },
+    fnteditRol(id) {
+      document.querySelector("#titleModal").innerHTML = "Actualizar Rol";
+      document
+        .querySelector(".modal-header")
+        .classList.replace("headerRegister", "headerUpdate");
+      document
+        .querySelector("#btnActionForm")
+        .classList.replace("btn-primary", "btn-info");
+      document.querySelector("#btnText").innerHTML = "Actualizar";
+
+      fetch("http://localhost:5000/" + id)
+        .then((res) => res.json())
+        .then((data) => {
+          this.task = new Task(
+            data.identificacion,
+            data.name,
+            data.lastname,
+            data.telephone,
+            data.email,
+            data.typeusername,
+            data.status,
+            data.password
+          );
+          this.taskToEdit = data._id;
+          this.edit = true;
+        });
     },
   },
 };
