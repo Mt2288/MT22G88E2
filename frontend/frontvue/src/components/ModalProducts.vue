@@ -121,10 +121,10 @@
 
             <div class="tile-footer">
               <input
+                ref="Close"
                 type="submit"
                 id="btnActionForm"
                 class="btn btn-primary"
-                data-bs-dismiss="modal"
               />
               &nbsp;&nbsp;
               <input
@@ -175,7 +175,9 @@ export default {
           },
         })
         .then((response) => {
-          if (response.status == 200) this.success();
+          if (response.status == 200) {
+            this.success();
+          }
         });
     },
     success() {
@@ -191,6 +193,10 @@ export default {
         icon: "error",
         text: "Error!",
       });
+    },
+    closeModal() {
+      document.getElementById("close").click();
+      this.$refs.Close.click();
     },
   },
 };

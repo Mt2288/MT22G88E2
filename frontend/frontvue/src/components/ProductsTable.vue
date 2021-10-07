@@ -125,7 +125,6 @@ export default {
             .then((res) => res.json())
             .then((data) => {
               this.getTasks(data);
-              if (data.status == 200) this.success();
             });
         }
       });
