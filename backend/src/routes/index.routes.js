@@ -37,17 +37,42 @@ router.get('/:id', async (req, res) => {
   res.json(task);
 });
 
+//envia una peticion a el frontend para asi editar los datos
+router.get('/productos/:id', async (req, res) => {
+  const data = await Task.findById(req.params.id);
+  res.json(data);
+
+});
+
+
+
+//metodo para actualizar un registro de la base de datos
+router.put('/productos/:id', async (req, res) => {
+  
+  const newTask = req.body;
+
+  //obtiene el id por consola
+  //console.log(req.params.id);
+  await Task.findByIdAndUpdate(req.params.id, newTask);
+  res.json({ status: 'actualizado' });
+
+});
+
+
 //metodo para actualizar un registro de la base de datos
 router.put('/:id', async (req, res) => {
-  const { title, description } = req.body;
-  const newTask = { title, description };
-
+  //const { title, description } = req.body;
+  // const newTask = { title, description };
+  const newTask = req.body;
   //obtiene el id por consola
   //console.log(req.params.id);
   await User.findByIdAndUpdate(req.params.id, newTask);
   res.json({ status: 'actualizado' });
 
 });
+
+
+
 //borra un registro en la base
 router.delete('/:id', async (req, res) => {
   await User.findByIdAndRemove(req.params.id);

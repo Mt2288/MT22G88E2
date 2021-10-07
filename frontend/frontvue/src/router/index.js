@@ -18,13 +18,27 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "/dashboard/users/save/:id",
+        name:"UserUpdate",
+        component: () => import("../components/Users/Save.vue"),
+      },
+      {
+        path: "/dashboard/productos/save/:id",
+        name:"ProductUpdate",
+        component: () => import("../components/Products/Save.vue"),
+      },
+    ],    
+
   },
   {
     path: '/',
     name: 'Login',
     component: Login
   },
+
   {
     path: '/crearusuario',
     name: 'Creacion',
@@ -40,8 +54,9 @@ const routes = [
     path: '/productos',
     name: 'Productos',
     component: Productos,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
   },
+
   {
     path: '/:catchAll(.*)',
     name: 'error',
