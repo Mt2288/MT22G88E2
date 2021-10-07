@@ -36,14 +36,12 @@
                   >
                 </td>
                 <td>
-                  <button
-                    data-bs-target="#modalFormProductos"
-                    data-bs-toggle="modal"
-                    @click="actualizarTask(task._id)"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                  </button>
+                    <router-link
+                      :to="{ name: 'ProductUpdate', params: { id: task._id } }"
+                      class="btn btn-sm btn-primary"
+                    >
+                    Edit
+                    </router-link>
                   <button
                     @click="deleteTask(task._id)"
                     class="btn btn-danger btn-sm"
