@@ -1,63 +1,57 @@
 <template>
   <div id="tareas">
-    <div class="row pt-5">
-      <div class="col-md-12">
-        <div class="tile">
-          <div class="tile-body">
-            <div class="table-responsive">
-              <table class="table table-striped table-hover">
-                <thead class="table-white">
-                  <tr>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Marca</th>
-                    <th>Categoría</th>
-                    <th>Stock</th>
-                    <th>Precio</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="task in tasks" v-bind:key="task.id">
-                    <td>{{ task.code }}</td>
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.marca }}</td>
-                    <td>{{ task.category }}</td>
-                    <td>{{ task.stock }}</td>
-                    <td>{{ task.precio }}</td>
-                    <td>
-                      <span
-                        v-if="task.status == 'Activo'"
-                        class="badge badge-pill badge-success"
-                      >
-                        {{ task.status }}</span
-                      >
-                      <span v-else class="badge badge-pill badge-danger">
-                        {{ task.status }}</span
-                      >
-                    </td>
-                    <td>
-                      <button
-                        data-bs-target="#modalFormProductos"
-                        data-bs-toggle="modal"
-                        @click="actualizarTask(task._id)"
-                        class="btn btn-secondary btn-sm"
-                      >
-                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                      </button>
-                      <button
-                        @click.prevent="deleteTask(task._id)"
-                        class="btn btn-danger btn-sm"
-                      >
-                        <i class="far fa-trash-alt" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <div class="container">
+      <div class="row pt-5">
+        <div class="col-md-14">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="task in tasks" v-bind:key="task.id">
+                <td>{{ task.code }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.marca }}</td>
+                <td>{{ task.category }}</td>
+                <td>{{ task.stock }}</td>
+                <td>{{ task.precio }}</td>
+                <td>
+                  <span
+                    v-if="task.status == 'Activo'"
+                    class="badge badge-pill badge-success"
+                  >
+                    {{ task.status }}</span
+                  >
+                  <span v-else class="badge badge-pill badge-danger">
+                    {{ task.status }}</span
+                  >
+                </td>
+                <td>
+                    <router-link
+                      :to="{ name: 'ProductUpdate', params: { id: task._id } }"
+                      class="btn btn-sm btn-primary"
+                    >
+                    Edit
+                    </router-link>
+                  <button
+                    @click.prevent="deleteTask(task._id)"
+                    class="btn btn-danger btn-sm"
+                  >
+                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

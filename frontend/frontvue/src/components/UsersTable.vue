@@ -38,16 +38,12 @@
                       >
                     </td>
                     <td>
-                      <button
-                        data-bs-target="#modalFormUsuario"
-                        data-bs-toggle="modal"
-                        class="btn btn-secondary btn-sm"
-                        @click="fnteditRol(task._id)"
-                        title="Editar"
-                      >
-                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                      </button>
-
+                       <router-link
+                         :to="{ name: 'UserUpdate', params: { id: task._id } }"
+                         class="btn btn-sm btn-primary"
+                       >
+                        Edit
+                      </router-link>
                       <button
                         class="btn btn-danger btn-sm"
                         @click="deleteTask(task._id)"

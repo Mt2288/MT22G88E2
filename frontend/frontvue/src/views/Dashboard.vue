@@ -12,18 +12,15 @@
         <div id="content">
           <!-- Topbar -->
           <Header/>
+
           <!-- End of Topbar -->
 
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <!-- Page Heading -->
-            <div
-              class="d-sm-flex align-items-center justify-content-between mb-4"
-            >
-              <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-               
-            </div>
-            <TaskApp/>
+
+              <router-view />
+            <!-- <TaskApp/> -->
           </div>
           <!-- /.container-fluid -->
         </div>
@@ -76,20 +73,22 @@
         </div>
       </div>
     </div>
+
   </div>
+
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
-import TaskApp from "@/components/TaskApp.vue";
+// import TaskApp from "@/components/TaskApp.vue";
 
 export default {
 name: 'Dashboard',
   components: {
     Header,
     AppSidebar,
-    TaskApp,
+    // TaskApp,
   },
 };
 </script>
