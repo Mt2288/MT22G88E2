@@ -1,59 +1,63 @@
 <template>
   <div id="tareas">
-    <div class="container">
-      <div class="row pt-5">
-        <div class="col-md-14">
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Nombre</th>
-                <th>Marca</th>
-                <th>Categoría</th>
-                <th>Stock</th>
-                <th>Precio</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="task in tasks" v-bind:key="task.id">
-                <td>{{ task.code }}</td>
-                <td>{{ task.name }}</td>
-                <td>{{ task.marca }}</td>
-                <td>{{ task.category }}</td>
-                <td>{{ task.stock }}</td>
-                <td>{{ task.precio }}</td>
-                <td>
-                  <span
-                    v-if="task.status == 'Activo'"
-                    class="badge badge-pill badge-success"
-                  >
-                    {{ task.status }}</span
-                  >
-                  <span v-else class="badge badge-pill badge-danger">
-                    {{ task.status }}</span
-                  >
-                </td>
-                <td>
-                  <button
-                    data-bs-target="#modalFormProductos"
-                    data-bs-toggle="modal"
-                    @click="actualizarTask(task._id)"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                  </button>
-                  <button
-                    @click="deleteTask(task._id)"
-                    class="btn btn-danger btn-sm"
-                  >
-                    <i class="far fa-trash-alt" aria-hidden="true"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="row pt-5">
+      <div class="col-md-12">
+        <div class="tile">
+          <div class="tile-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead class="table-white">
+                  <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="task in tasks" v-bind:key="task.id">
+                    <td>{{ task.code }}</td>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.marca }}</td>
+                    <td>{{ task.category }}</td>
+                    <td>{{ task.stock }}</td>
+                    <td>{{ task.precio }}</td>
+                    <td>
+                      <span
+                        v-if="task.status == 'Activo'"
+                        class="badge badge-pill badge-success"
+                      >
+                        {{ task.status }}</span
+                      >
+                      <span v-else class="badge badge-pill badge-danger">
+                        {{ task.status }}</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        data-bs-target="#modalFormProductos"
+                        data-bs-toggle="modal"
+                        @click="actualizarTask(task._id)"
+                        class="btn btn-secondary btn-sm"
+                      >
+                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                      </button>
+                      <button
+                        @click.prevent="deleteTask(task._id)"
+                        class="btn btn-danger btn-sm"
+                      >
+                        <i class="far fa-trash-alt" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -61,6 +65,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 //import ModalUsers from "@/components/ModalUsers.vue";
 class Task {
   constructor(code, name, marca, category, stock, precio, status) {
@@ -100,17 +105,30 @@ export default {
         });
     },
     deleteTask(id) {
-      fetch("http://localhost:5000/productos/" + id, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          this.getTasks(data);
-        });
+      Swal.fire({
+        title: "Estas seguro?",
+        text: "¡No podrás revertir esto!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, bórralo!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch("http://localhost:5000/productos/" + id, {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+              "Content-type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              this.getTasks(data);
+              if (data.status == 200) this.success();
+            });
+        }
+      });
     },
     actualizarTask(id) {
       fetch("http://localhost:5000/" + id)

@@ -22,7 +22,8 @@
       <li class="nav-item active">
         <a class="nav-link" :href="'/dashboard'">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>Dashboard</span></a
+        >
       </li>
 
       <!-- Divider -->
@@ -84,11 +85,10 @@
 
 <script>
 export default {
-  name: 'AppSidebar',
-}
+  name: "AppSidebar",
+};
 </script>
 
 
 <style>
-
 </style>
