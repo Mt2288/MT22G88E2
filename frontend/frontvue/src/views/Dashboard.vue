@@ -3,7 +3,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
       <!-- Sidebar -->
-      <AppSidebar/>
+      <AppSidebar />
       <!-- End of Sidebar -->
 
       <!-- Content Wrapper -->
@@ -11,7 +11,7 @@
         <!-- Main Content -->
         <div id="content">
           <!-- Topbar -->
-          <Header/>
+          <Header />
 
           <!-- End of Topbar -->
 
@@ -19,7 +19,7 @@
           <div class="container-fluid">
             <!-- Page Heading -->
 
-              <router-view />
+            <router-view />
             <!-- <TaskApp/> -->
           </div>
           <!-- /.container-fluid -->
@@ -73,9 +73,7 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </template>
 
 <script>
@@ -84,7 +82,7 @@ import AppSidebar from "@/components/AppSidebar.vue";
 // import TaskApp from "@/components/TaskApp.vue";
 
 export default {
-name: 'Dashboard',
+  name: "Dashboard",
   components: {
     Header,
     AppSidebar,
@@ -95,10 +93,9 @@ name: 'Dashboard',
 
 <style scoped>
 #dashboard h1 {
-  text-align: center; 
+  text-align: center;
   width: 100%;
   padding: 1%;
-  height: 10vh;  
+  height: 10vh;
 }
-
 </style>

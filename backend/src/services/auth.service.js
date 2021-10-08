@@ -12,11 +12,7 @@ const authService = {
     login: async function (data) {
         try {
             const { email, password } = data;
-            let userExists = await User.findOne({
-                where: {
-                    email: email,
-                }
-            });
+            let userExists = await User.findOne({ email: email });
             if (!userExists) {
                 return {
                     code: 400,

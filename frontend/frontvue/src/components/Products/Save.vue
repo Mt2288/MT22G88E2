@@ -1,116 +1,122 @@
 <template>
-<div>
-  <div
-    class="
-      d-flex
-      justify-content-between
-      flex-wrap flex-md-nowrap
-      align-items-center
-      pt-3
-      pb-2
-      mb-3
-      border-bottom
-    "
-  >
-    <h1 class="h2">Save Product</h1>
-  </div>
-  <form @submit.prevent="submit" class="form">
-    <div class="mb-3">
-      <label for="name" class="form-label"> Código de producto </label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.code"
-      />
+  <div class="container">
+    <div
+      class="
+        container
+        d-sm-flex
+        align-items-center
+        justify-content-left
+        mb-4
+        pb-1
+        border-bottom
+      "
+    >
+      <h1 class="h3 mb-0 text-gray-800">Actualizar producto</h1>
     </div>
-    <div class="mb-3">
-      <label for="name" class="form-label"> Nombre </label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.name"
-      />
-    </div>      
-    <div class="mb-3">
-      <label for="name" class="form-label"> Marca </label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.marca"
-      />
-    </div>      
-    <div class="mb-3">
-      <label for="name" class="form-label"> Categoría </label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.category"
-      />
-    </div>      
-        <div class="mb-3">
-      <label for="name" class="form-label"> Stock </label>
-      <input
-        type="number"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.stock"
-      />
-    </div>   
-    <div class="mb-3">
-      <label for="name" class="form-label"> Precio </label>
-      <input
-        type="number"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.precio"
-      />
-    </div>     
-            <div class="mb-3">
-             
-                <label >Estado</label>
-                <select
-                  class="form-control selectpicker"
-
-                  v-model="product.status"
-                >
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo">Inactivo</option>
-                </select>
-
-            </div>    
-               
-
-    <button v-on:click="alerta" class="btn btn-primary w-100">Save</button>
-  </form>
+    <div class="container">
+      <form @submit.prevent="submit" class="form">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Código de producto </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.code"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Nombre </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.name"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Marca </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.marca"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Categoría </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.category"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Stock </label>
+            <input
+              type="number"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.stock"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Precio </label>
+            <input
+              type="number"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.precio"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Estado</label>
+            <select class="form-control selectpicker" v-model="product.status">
+              <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <button v-on:click="success" class="btn btn-primary w-100">
+              Actualizar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 
 <script>
-// import Swal from "sweetalert2";
-// import "@sweetalert2/themes/bootstrap-4/bootstrap-4.css";
+import Swal from "sweetalert2";
 
 export default {
   data() {
     return {
       product: {
-        code:"",
-        name : "",
-        marca : "",
-        category : "",
-        stock : "",
-        precio : "",
-        status : "",      
+        code: "",
+        name: "",
+        marca: "",
+        category: "",
+        stock: "",
+        precio: "",
+        status: "",
       },
     };
   },
@@ -119,7 +125,7 @@ export default {
     // get the info from the api using fetch
     if ("id" in this.$route.params) {
       let id = this.$route.params.id;
-      console.log(id)
+      console.log(id);
       // fetch data
       fetch("http://localhost:5000/productos/" + id)
         // response to json
@@ -127,7 +133,7 @@ export default {
         // read data
         .then((data) => {
           this.product = data;
-          console.log(data)
+          console.log(data);
         });
     }
   },
@@ -140,13 +146,13 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          code : this.product.code,
-          name : this.product.name,
-          marca : this.product.marca,
-          category : this.product.category,
-          stock : this.product.stock,
-          precio : this.product.precio,
-          status : this.product.status,          
+          code: this.product.code,
+          name: this.product.name,
+          marca: this.product.marca,
+          category: this.product.category,
+          stock: this.product.stock,
+          precio: this.product.precio,
+          status: this.product.status,
         }),
       };
 
@@ -160,47 +166,20 @@ export default {
       // actually send the data
       fetch("http://localhost:5000/productos/" + id, config)
         .then((res) => {
-          if (res.status == "actualizado"){
-            alert("actualizado")
-
-          } 
+          if (res.status == "actualizado") {
+            alert("actualizado");
+          }
         })
-        .catch(()=>this.error());
+        .catch(() => this.error());
     },
-    alerta: function () {
-      alert("Producto guardado correctamente");
-    },    
-    // success() {
-    //   Swal.fire({
-    //     icon: "success",
-    //     text: "Product Saved",
-    //   }).then(() => {
-    //     this.$router.push("/dashboard/products");
-    //   });
-    // },
-    // actualizarTask(id) {
-    //   fetch("http://localhost:5000/" + id)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       this.task = new Task(
-    //         data.documento,
-    //         data.nombres,
-    //         data.apellidos,
-    //         data.telefono,
-    //         data.correo,
-    //         data.estado,
-    //         data.password
-    //       );
-    //       this.taskToEdit = data._id;
-    //       this.edit = true;
-    //     });
-    // },
-    // error() {
-    //   Swal.fire({
-    //     icon: "error",
-    //     text: "Error!",
-    //   });
-    // },
+    success() {
+      Swal.fire({
+        icon: "success",
+        text: "Producto actualizado correctamente",
+      }).then(() => {
+        this.$router.push("/productos");
+      });
+    },
   },
 };
 </script>

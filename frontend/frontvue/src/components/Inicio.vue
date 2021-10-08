@@ -72,6 +72,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 export default {
   name: "Inicio",
   components: {},
@@ -93,7 +94,7 @@ export default {
         if (data.data.status == "ok") {
           localStorage.setItem("token", data.data.token);
           console.log(localStorage.getItem("token"));
-          alert("Inicio de sesion exitoso");
+          this.InicioSesion();
           this.$router.push("/Dashboard");
         } else {
           this.error = true;
@@ -101,6 +102,12 @@ export default {
         }
       });
       this.$router.push("/");
+    },
+    InicioSesion() {
+      Swal.fire({
+        icon: "success",
+        title: "Inicio de sesion exitoso.",
+      });
     },
   },
 };

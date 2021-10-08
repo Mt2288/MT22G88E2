@@ -24,7 +24,7 @@
             id="formaProductos"
             name="formProductos"
             class="form-horizontal"
-            v-on:submit.prevent="login"
+            v-on:submit.prevent="newProduct"
           >
             <input type="hidden" id="idProducto" name="idProducto" value="" />
             <p class="text-primary">Todos los campos son obligatorios.</p>
@@ -107,7 +107,7 @@
               <div class="form-group col-md-6">
                 <label for="listStatus">Estado</label>
                 <select
-                  class="form-control selectpicker"
+                  class="form-control"
                   name="listStatus"
                   id="listStatus"
                   v-model="form.status"
@@ -121,10 +121,10 @@
 
             <div class="tile-footer">
               <input
+                ref="Close"
                 type="submit"
                 id="btnActionForm"
                 class="btn btn-primary"
-                data-bs-dismiss="modal"
               />
               &nbsp;&nbsp;
               <input
@@ -159,7 +159,7 @@ export default {
     };
   },
   methods: {
-    login() {
+    newProduct() {
       let formData = new URLSearchParams();
       formData.append("code", this.form.code);
       formData.append("name", this.form.name);
@@ -175,7 +175,12 @@ export default {
           },
         })
         .then((response) => {
-          if (response.status == 200) this.success();
+          if (response.status == 200) {
+            console.log(response.data);
+            this.success();
+          } else {
+            this.error();
+          }
         });
     },
     success() {
@@ -191,6 +196,10 @@ export default {
         icon: "error",
         text: "Error!",
       });
+    },
+    closeModal() {
+      document.getElementById("close").click();
+      this.$refs.Close.click();
     },
   },
 };

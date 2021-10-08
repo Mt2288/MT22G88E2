@@ -1,131 +1,125 @@
 <template>
-<div>
-  <div
-    class="
-      d-flex
-      justify-content-between
-      flex-wrap flex-md-nowrap
-      align-items-center
-      pt-3
-      pb-2
-      mb-3
-      border-bottom
-    "
-  >
-    <h1 class="h2">Save Product</h1>
-  </div>
-  <form @submit.prevent="submit" class="form">
-    <div class="mb-3">
-      <label for="name" class="form-label"> Identificacion </label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.identificacion"
-      />
+  <div class="container">
+    <div
+      class="
+        container
+        d-sm-flex
+        align-items-center
+        justify-content-left
+        mb-4
+        pb-1
+        border-bottom
+      "
+    >
+      <h1 class="h3 mb-0 text-gray-800">Actualizar usuario</h1>
     </div>
-    <div class="mb-3">
-      <label for="name" class="form-label"> Nombres </label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.name"
-      />
-    </div>      
-    <div class="mb-3">
-      <label for="name" class="form-label"> Apellidos </label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.lastname"
-      />
-    </div>      
-    <div class="mb-3">
-      <label for="name" class="form-label"> Telefono </label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.telephone"
-      />
-    </div>      
-        <div class="mb-3">
-      <label for="name" class="form-label"> Correo electronico </label>
-      <input
-        type="email"
-        class="form-control"
-        id="name"
-        placeholder="Name"
-        v-model="product.email"
-      />
-    </div>   
-   
-            <div class="mb-3">
-             
-                <label >Tipo de usuario</label>
-                <select
-                  class="form-control selectpicker"
+    <div class="container2">
+      <form @submit.prevent="submit" class="form container">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Identificacion </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.identificacion"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Nombres </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.name"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Apellidos </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.lastname"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Telefono </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.telephone"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="name" class="form-label"> Correo electronico </label>
+            <input
+              type="email"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              v-model="product.email"
+            />
+          </div>
 
-                  v-model="product.typeusername"
-                >
-                  <option value="Administrador">Administrador</option>
-                  <option value="Vendedor">Vendedor</option>
-                </select>
-
-            </div>    
-             <div class="mb-3">
-             
-                <label >Estado</label>
-                <select
-                  class="form-control selectpicker"
-
-                  v-model="product.status"
-                >
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo">Inactivo</option>
-                </select>
-
-            </div>    
-    <div class="mb-3">
-      <label for="txtPassword" class="form-label"> Contraseña </label>
-      <input
-        type="password"
-        class="form-control"
-        id="pass"
-        placeholder="Name"
-        v-model="product.password"
-      />
-    </div>              
-
-
-    <button v-on:click="alerta" class="btn btn-primary w-100">Save</button>
-  </form>
+          <div class="form-group col-md-4">
+            <label>Tipo de usuario</label>
+            <select
+              class="form-control selectpicker"
+              v-model="product.typeusername"
+            >
+              <option value="Administrador">Administrador</option>
+              <option value="Vendedor">Vendedor</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Estado</label>
+            <select class="form-control selectpicker" v-model="product.status">
+              <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <button v-on:click="success" class="btn btn-primary w-100">
+              Actualizar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 
 <script>
-// import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 // import "@sweetalert2/themes/bootstrap-4/bootstrap-4.css";
 
 export default {
   data() {
     return {
       product: {
-        identificacion:"",
-        name : "",
-        lastname : "",
-        telephone : "",
-        email : "",
-        typeusername : "",
-        status : "",      
-        password : "",         
+        identificacion: "",
+        name: "",
+        lastname: "",
+        telephone: "",
+        email: "",
+        typeusername: "",
+        status: "",
+        password: "",
       },
     };
   },
@@ -134,7 +128,7 @@ export default {
     // get the info from the api using fetch
     if ("id" in this.$route.params) {
       let id = this.$route.params.id;
-      console.log(id)
+      console.log(id);
       // fetch data
       fetch("http://localhost:5000/" + id)
         // response to json
@@ -142,7 +136,7 @@ export default {
         // read data
         .then((data) => {
           this.product = data;
-          console.log(data)
+          console.log(data);
         });
     }
   },
@@ -155,14 +149,14 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          identificacion : this.product.identificacion,
-          name : this.product.name,
-          lastname : this.product.lastname,
-          telephone : this.product.telephone,
-          email : this.product.email,
-          typeusername : this.product.typeusername,
-          status : this.product.status, 
-          password : this.product.password,                    
+          identificacion: this.product.identificacion,
+          name: this.product.name,
+          lastname: this.product.lastname,
+          telephone: this.product.telephone,
+          email: this.product.email,
+          typeusername: this.product.typeusername,
+          status: this.product.status,
+          password: this.product.password,
         }),
       };
 
@@ -176,47 +170,20 @@ export default {
       // actually send the data
       fetch("http://localhost:5000/" + id, config)
         .then((res) => {
-          if (res.status == "actualizado"){
-            alert("actualizado")
-
-          } 
+          if (res.status == "actualizado") {
+            alert("actualizado");
+          }
         })
-        .catch(()=>this.error());
+        .catch(() => this.error());
     },
-    alerta: function () {
-      alert("Producto guardado correctamente");
-    },    
-    // success() {
-    //   Swal.fire({
-    //     icon: "success",
-    //     text: "Product Saved",
-    //   }).then(() => {
-    //     this.$router.push("/dashboard/products");
-    //   });
-    // },
-    // actualizarTask(id) {
-    //   fetch("http://localhost:5000/" + id)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       this.task = new Task(
-    //         data.documento,
-    //         data.nombres,
-    //         data.apellidos,
-    //         data.telefono,
-    //         data.correo,
-    //         data.estado,
-    //         data.password
-    //       );
-    //       this.taskToEdit = data._id;
-    //       this.edit = true;
-    //     });
-    // },
-    // error() {
-    //   Swal.fire({
-    //     icon: "error",
-    //     text: "Error!",
-    //   });
-    // },
+    success() {
+      Swal.fire({
+        icon: "success",
+        text: "Usuario actualizado correctamente",
+      }).then(() => {
+        this.$router.push("/usuarios");
+      });
+    },
   },
 };
 </script>

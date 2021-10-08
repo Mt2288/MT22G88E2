@@ -48,7 +48,7 @@ router.get('/productos/:id', async (req, res) => {
 
 //metodo para actualizar un registro de la base de datos
 router.put('/productos/:id', async (req, res) => {
-  
+
   const newTask = req.body;
 
   //obtiene el id por consola
