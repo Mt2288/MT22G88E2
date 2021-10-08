@@ -22,15 +22,15 @@ const routes = [
     children: [
       {
         path: "/dashboard/users/save/:id",
-        name:"UserUpdate",
+        name: "UserUpdate",
         component: () => import("../components/Users/Save.vue"),
       },
       {
         path: "/dashboard/productos/save/:id",
-        name:"ProductUpdate",
+        name: "ProductUpdate",
         component: () => import("../components/Products/Save.vue"),
       },
-    ],    
+    ],
 
   },
   {
@@ -72,18 +72,30 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(route => route.meta.requiresAuth)) {
+  if (to.meta.requiresAuth) {
     if (!localStorage.getItem('token')) {
       next({
-        name: 'Login'
-      });
+        name: 'login'
+      })
+      this.$router.push('/home');
     } else {
-      next()
+      next();
     }
-
   } else {
     next();
   }
-});
+
+  if (to.meta.isAuth) {
+    if (localStorage.getItem('token')) {
+      next({
+        name: 'home'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 
 export default router

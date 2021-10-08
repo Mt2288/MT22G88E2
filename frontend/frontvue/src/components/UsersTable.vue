@@ -38,11 +38,11 @@
                       >
                     </td>
                     <td>
-                       <router-link
-                         :to="{ name: 'UserUpdate', params: { id: task._id } }"
-                         class="btn btn-sm btn-primary"
-                       >
-                        Edit
+                      <router-link
+                        :to="{ name: 'UserUpdate', params: { id: task._id } }"
+                        class="btn btn-sm btn-primary"
+                      >
+                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                       </router-link>
                       <button
                         class="btn btn-danger btn-sm"
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 //import ModalUsers from "@/components/ModalUsers.vue";
 class Task {
   constructor(
@@ -73,7 +74,8 @@ class Task {
     telephone,
     email,
     typeusername,
-    status
+    status,
+    password
   ) {
     this.identificacion = identificacion;
     this.name = name;
@@ -82,6 +84,7 @@ class Task {
     this.email = email;
     this.typeusername = typeusername;
     this.status = status;
+    this.password = password;
   }
 }
 export default {
@@ -111,17 +114,29 @@ export default {
         });
     },
     deleteTask(id) {
-      fetch("http://localhost:5000/" + id, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          this.getTasks(data);
-        });
+      Swal.fire({
+        title: "Estas seguro?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, bórralo!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch("http://localhost:5000/" + id, {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+              "Content-type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              this.getTasks(data);
+              if (data.status == 200) this.success();
+            });
+        }
+      });
     },
     actualizarTask(id) {
       fetch("http://localhost:5000/" + id)
@@ -145,33 +160,6 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
-    },
-    fnteditRol(id) {
-      document.querySelector("#titleModal").innerHTML = "Actualizar Rol";
-      document
-        .querySelector(".modal-header")
-        .classList.replace("headerRegister", "headerUpdate");
-      document
-        .querySelector("#btnActionForm")
-        .classList.replace("btn-primary", "btn-info");
-      document.querySelector("#btnText").innerHTML = "Actualizar";
-
-      fetch("http://localhost:5000/" + id)
-        .then((res) => res.json())
-        .then((data) => {
-          this.task = new Task(
-            data.identificacion,
-            data.name,
-            data.lastname,
-            data.telephone,
-            data.email,
-            data.typeusername,
-            data.status,
-            data.password
-          );
-          this.taskToEdit = data._id;
-          this.edit = true;
-        });
     },
   },
 };

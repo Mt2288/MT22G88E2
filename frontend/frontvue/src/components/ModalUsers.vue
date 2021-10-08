@@ -20,18 +20,22 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="formUsuario" name="formUsuario" class="form-horizontal">
+          <form
+            id="formUsuario"
+            name="formUsuario"
+            class="form-horizontal"
+            v-on:submit.prevent="newUser"
+          >
             <input type="hidden" id="idUsuario" name="idUsuario" value="" />
             <p class="text-primary">Todos los campos son obligatorios.</p>
-
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="txtIdentificacion">No. de documento</label>
+                <label for="txtID">No. de documento</label>
                 <input
                   type="text"
-                  class="form-control valid validNumber"
-                  id="txtIdentificacion"
-                  name="txtIdentificacion"
+                  class="form-control valid validText"
+                  name="txtID"
+                  id="txtID"
                   v-model="form.identificacion"
                   required
                 />
@@ -51,25 +55,25 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="txtApellido">Apellidos</label>
+                <label for="txtlastname">Apellidos</label>
                 <input
                   type="text"
                   class="form-control valid validText"
-                  name="txtApellido"
-                  id="txtApellido"
+                  name="txtlastname"
+                  id="txtlastname"
                   v-model="form.lastname"
                   required
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="txtTelefono">Teléfono</label>
+                <label for="txtCategoria">Telefono</label>
                 <input
                   type="text"
-                  class="form-control valid validNumber"
+                  class="form-control"
                   name="txtTelefono"
                   id="txtTelefono"
                   v-model="form.telephone"
-                  required
+                  required="true"
                 />
               </div>
             </div>
@@ -79,7 +83,7 @@
                 <label for="txtEmail">Correo electrónico</label>
                 <input
                   type="email"
-                  class="form-control valid validEmail"
+                  class="form-control"
                   name="txtEmail"
                   id="txtEmail"
                   v-model="form.email"
@@ -87,11 +91,11 @@
                 />
               </div>
               <div class="form-group col-md-6">
-                <label for="listRolid">Tipo de usuario</label>
+                <label for="listTypeUser">Tipo de usuario</label>
                 <select
                   class="form-control"
-                  name="listRolid"
-                  id="listRolid"
+                  name="listTypeUser"
+                  id="listTypeUser"
                   v-model="form.typeusername"
                   required
                 >
@@ -105,10 +109,11 @@
               <div class="form-group col-md-6">
                 <label for="listStatus">Estado</label>
                 <select
-                  class="form-control selectpicker"
+                  class="form-control"
                   name="listStatus"
                   id="listStatus"
                   v-model="form.status"
+                  required
                 >
                   <option value="Activo">Activo</option>
                   <option value="Inactivo">Inactivo</option>
@@ -120,30 +125,27 @@
                   type="password"
                   class="form-control"
                   name="txtPassword"
-                  id="pass"
+                  id="txtPassword"
                   v-model="form.password"
+                  required
                 />
               </div>
             </div>
 
             <div class="tile-footer">
-              <button
+              <input
+                ref="Close"
+                type="submit"
                 id="btnActionForm"
                 class="btn btn-primary"
+              />
+              &nbsp;&nbsp;
+              <input
                 type="submit"
-                @click="login"
-                v-on:click="alerta"
-              >
-                <i class="fa fa-fw fa-lg fa-check-circle"></i
-                ><span id="btnText">Guardar</span></button
-              >&nbsp;&nbsp;&nbsp;
-              <button
+                value="Cerrar"
                 class="btn btn-danger"
-                type="button"
                 data-bs-dismiss="modal"
-              >
-                <i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar
-              </button>
+              />
             </div>
           </form>
         </div>
@@ -154,9 +156,11 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
+      modal: false,
       form: {
         identificacion: "",
         name: "",
@@ -167,11 +171,10 @@ export default {
         status: "",
         password: "",
       },
-      isModalVisible: false,
     };
   },
   methods: {
-    login() {
+    newUser() {
       let formData = new URLSearchParams();
       formData.append("identificacion", this.form.identificacion);
       formData.append("name", this.form.name);
@@ -188,11 +191,27 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          if (response.status == 200) {
+            console.log(response.data);
+            this.success();
+          } else {
+            this.error();
+          }
         });
     },
-    alerta: function () {
-      alert("Datos guardados correctamente");
+    success() {
+      Swal.fire({
+        icon: "success",
+        text: "Usuario guardado correctamente",
+      }).then(() => {
+        this.$router.push("/usuarios");
+      });
+    },
+    error() {
+      Swal.fire({
+        icon: "error",
+        text: "Error!",
+      });
     },
   },
 };
