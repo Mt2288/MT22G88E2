@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="SidebarApp">
     <ul
       class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion"
       id="accordionSidebar"
@@ -7,7 +7,7 @@
       <!-- Sidebar - Brand -->
       <a
         class="sidebar-brand d-flex align-items-center justify-content-center"
-        :href="'/'"
+        :href="'/information'"
       >
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-tools"></i>
@@ -20,7 +20,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" :href="'/dashboard'">
+        <a class="nav-link" :href="'/information'">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a
         >
@@ -71,14 +71,6 @@
           <span>Productos</span>
         </a>
       </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block" />
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
     </ul>
   </div>
 </template>
@@ -90,5 +82,9 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+ul {
+  height: 100vh;
+}
 </style>
+

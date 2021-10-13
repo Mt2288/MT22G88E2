@@ -1,6 +1,6 @@
 <template>
   <div id="Inicio">
-    <body class="bg-dark">
+    <body class="bg-dark bg-gradient">
       <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
           <main>
@@ -10,7 +10,7 @@
                   <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header">
                       <h3 class="text-center font-weight-light my-4">
-                        Iniciar sesion
+                        Iniciar sesión
                       </h3>
                     </div>
                     <div class="card-body">
@@ -50,9 +50,6 @@
                             @click="login"
                             value="Iniciar sesión"
                           />
-                          <a class="btn" :href="'/crearusuario'">
-                            <span>Registrarse</span>
-                          </a>
                         </div>
                       </form>
                       <div class="alert alert-danger" role="alert" v-if="error">
@@ -90,12 +87,12 @@ export default {
         email: this.email,
         password: this.password,
       };
-      axios.post("http://localhost:5000/login/", json).then((data) => {
+      axios.post("https://ferremax.herokuapp.com/login/", json).then((data) => {
         if (data.data.status == "ok") {
+          this.InicioSesion();
           localStorage.setItem("token", data.data.token);
           console.log(localStorage.getItem("token"));
-          this.InicioSesion();
-          this.$router.push("/Dashboard");
+          this.$router.push("/dashboard");
         } else {
           this.error = true;
           this.error_msg = data.data.status;

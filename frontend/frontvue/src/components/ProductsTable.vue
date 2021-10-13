@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     getTasks() {
-      fetch("http://localhost:5000/productos")
+      fetch("https://ferremax.herokuapp.com/productos")
         .then((res) => res.json())
         .then((data) => {
           this.tasks = data;
@@ -115,7 +115,7 @@ export default {
         confirmButtonText: "Sí, bórralo!",
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch("http://localhost:5000/productos/" + id, {
+          fetch("https://ferremax.herokuapp.com/productos/" + id, {
             method: "DELETE",
             headers: {
               Accept: "application/json",
@@ -132,7 +132,7 @@ export default {
       });
     },
     actualizarTask(id) {
-      fetch("http://localhost:5000/" + id)
+      fetch("https://ferremax.herokuapp.com/" + id)
         .then((res) => res.json())
         .then((data) => {
           this.task = new Task(

@@ -8,7 +8,7 @@
         <p class="text-gray-500 mb-0">
           It looks like you found a glitch in the matrix...
         </p>
-        <a href="index.html">&larr; Back to Dashboard</a>
+        <a :href="'/information'">&larr; Back to Dashboard</a>
       </div>
     </div>
   </div>
@@ -16,18 +16,16 @@
 
 <script>
 export default {
-  name: 'error',
-  components: { 
-  },
-}
+  name: "error",
+  components: {},
+};
 </script>
 
 <style scoped>
 #dashboard h1 {
-  text-align: center; 
+  text-align: center;
   width: 100%;
   padding: 1%;
-  height: 10vh;  
+  height: 10vh;
 }
-
 </style>
