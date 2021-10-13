@@ -1,16 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
 import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
-import Creacion from '../views/Creacion.vue'
 import Productos from '../views/Productos.vue'
 import Usuarios from '../views/Usuarios.vue'
 import Error from '@/views/Error404';
-
-//import Vue from 'vue'
-//import VueRouter from 'vue-router'
-//Vue.use(VueRouter)
-
+import Information from '../views/Informacion.vue'
 
 const routes = [
 
@@ -34,15 +28,18 @@ const routes = [
 
   },
   {
+    path: '/information',
+    name: 'Information',
+    component: Information,
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/',
     name: 'Login',
-    component: Login
-  },
-
-  {
-    path: '/crearusuario',
-    name: 'Creacion',
-    component: Creacion
+    component: Login,
+    meta: {
+      isAuth: true
+    }
   },
   {
     path: '/usuarios',
@@ -72,23 +69,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
+  if (to.matched.some(route => route.meta.requiresAuth)) {
     if (!localStorage.getItem('token')) {
       next({
-        name: 'login'
-      })
-      this.$router.push('/home');
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
-
-  if (to.meta.isAuth) {
-    if (localStorage.getItem('token')) {
-      next({
-        name: 'home'
+        name: 'Login'
       })
     } else {
       next()
@@ -97,5 +81,4 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-
 export default router
