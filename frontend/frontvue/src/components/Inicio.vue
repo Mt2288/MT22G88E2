@@ -98,6 +98,7 @@ export default {
           this.error_msg = data.data.status;
         }
       });
+      this.InicioFallido();      
       this.$router.push("/");
     },
     InicioSesion() {
@@ -106,6 +107,12 @@ export default {
         title: "Inicio de sesion exitoso.",
       });
     },
+    InicioFallido() {
+      Swal.fire({
+        icon: "error",
+        title: "Usuario o contraseña incorrecto.",
+      });
+    },    
   },
 };
 </script>
