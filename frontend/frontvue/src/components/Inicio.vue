@@ -94,11 +94,10 @@ export default {
           console.log(localStorage.getItem("token"));
           this.$router.push("/information");
         } else {
-          this.error = true;
-          this.error_msg = data.data.status;
+        this.InicioFallido(); 
         }
       });
-      this.InicioFallido();      
+     
       this.$router.push("/");
     },
     InicioSesion() {
