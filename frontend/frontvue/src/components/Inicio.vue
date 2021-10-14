@@ -92,12 +92,12 @@ export default {
           this.InicioSesion();
           localStorage.setItem("token", data.data.token);
           console.log(localStorage.getItem("token"));
-          this.$router.push("/dashboard");
+          this.$router.push("/information");
         } else {
-          this.error = true;
-          this.error_msg = data.data.status;
+        this.InicioFallido(); 
         }
       });
+     
       this.$router.push("/");
     },
     InicioSesion() {
@@ -106,6 +106,12 @@ export default {
         title: "Inicio de sesion exitoso.",
       });
     },
+    InicioFallido() {
+      Swal.fire({
+        icon: "error",
+        title: "Usuario o contraseña incorrecto.",
+      });
+    },    
   },
 };
 </script>
