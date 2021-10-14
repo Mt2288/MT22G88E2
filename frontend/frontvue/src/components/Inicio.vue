@@ -92,7 +92,7 @@ export default {
           this.InicioSesion();
           localStorage.setItem("token", data.data.token);
           console.log(localStorage.getItem("token"));
-          this.$router.push("/dashboard");
+          this.$router.push("/information");
         } else {
           this.error = true;
           this.error_msg = data.data.status;
