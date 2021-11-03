@@ -14,10 +14,8 @@
         </div>
         <div class="sidebar-brand-text mx-3">FerreMax</div>
       </a>
-
       <!-- Divider -->
       <hr class="sidebar-divider my-0" />
-
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" :href="'/information'">
@@ -25,7 +23,6 @@
           <span>Dashboard</span></a
         >
       </li>
-
       <!-- Divider -->
       <hr class="sidebar-divider" />
       <!-- Heading -->
@@ -68,7 +65,7 @@
           aria-controls="collapseTwo"
         >
           <i class="fas fa-fw fa-cog"></i>
-          <span>Productos</span>
+          <span>Products</span>
         </a>
       </li>
     </ul>
