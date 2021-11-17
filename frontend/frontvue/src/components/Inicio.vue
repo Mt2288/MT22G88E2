@@ -87,7 +87,7 @@ export default {
         email: this.email,
         password: this.password,
       };
-      axios.post("https://ferremax.herokuapp.com/login/", json).then((data) => {
+      axios.post("https://mintic3.herokuapp.com/login/", json).then((data) => {
         if (data.data.status == "ok") {
           this.InicioSesion();
           localStorage.setItem("token", data.data.token);

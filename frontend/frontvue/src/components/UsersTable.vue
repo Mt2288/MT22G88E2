@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     getTasks() {
-      fetch("https://ferremax.herokuapp.com/")
+      fetch("https://mintic3.herokuapp.com/")
         .then((res) => res.json())
         .then((data) => {
           this.tasks = data;
@@ -123,7 +123,7 @@ export default {
         confirmButtonText: "Sí, bórralo!",
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch("https://ferremax.herokuapp.com/" + id, {
+          fetch("https://mintic3.herokuapp.com/" + id, {
             method: "DELETE",
             headers: {
               Accept: "application/json",
@@ -139,7 +139,7 @@ export default {
       });
     },
     actualizarTask(id) {
-      fetch("https://ferremax.herokuapp.com/" + id)
+      fetch("https://mintic3.herokuapp.com/" + id)
         .then((res) => res.json())
         .then((data) => {
           this.task = new Task(

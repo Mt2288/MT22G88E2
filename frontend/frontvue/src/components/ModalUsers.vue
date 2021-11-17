@@ -185,7 +185,7 @@ export default {
       formData.append("status", this.form.status);
       formData.append("password", this.form.password);
       axios
-        .post("https://ferremax.herokuapp.com/register", formData, {
+        .post("https://mintic3.herokuapp.com/register", formData, {
           headers: {
             "Access-Control-Allow_Methods": "POST",
           },
