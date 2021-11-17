@@ -169,7 +169,7 @@ export default {
       formData.append("precio", this.form.precio);
       formData.append("status", this.form.status);
       axios
-        .post("https://ferremax.herokuapp.com/productos", formData, {
+        .post("https://mintic3.herokuapp.com/productos", formData, {
           headers: {
             "Access-Control-Allow_Methods": "POST",
           },

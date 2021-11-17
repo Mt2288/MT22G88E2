@@ -127,7 +127,7 @@ export default {
       let id = this.$route.params.id;
       console.log(id);
       // fetch data
-      fetch("https://ferremax.herokuapp.com/productos/" + id)
+      fetch("https://mintic3.herokuapp.com/productos/" + id)
         // response to json
         .then((res) => res.json())
         // read data
@@ -164,7 +164,7 @@ export default {
       }
 
       // actually send the data
-      fetch("https://ferremax.herokuapp.com/productos/" + id, config)
+      fetch("https://mintic3.herokuapp.com/productos/" + id, config)
         .then((res) => {
           if (res.status == "actualizado") {
             alert("actualizado");
